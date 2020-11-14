@@ -9,7 +9,7 @@ public class Personagem {
 	private LocalDate dataNascimento;
 	private List<Evento> eventos;
 	private String descricao;
-
+	
 	public Personagem(String nome, LocalDate dataNascimento, List<Evento> eventos,
 			String descricao) {
 		this.nome = nome;
@@ -61,4 +61,10 @@ public class Personagem {
 		this.descricao = descricao;
 	}
 
+	@Override
+	public String toString() {
+		return "Personagem [idPersonagem=" + idPersonagem + ", nome=" + nome + ", dataNascimento=" + dataNascimento
+				+ ", eventos=" + eventos + ", descricao=" + descricao + "]";
+	}
+	
 }

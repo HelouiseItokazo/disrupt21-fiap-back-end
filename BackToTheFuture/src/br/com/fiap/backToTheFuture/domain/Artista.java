@@ -7,13 +7,11 @@ public class Artista {
 	private Long idArtista;
 	private String nome;
 	private LocalDate dataNascimento;
-	private String genero;
 	private List<Personagem> personagens;
-
-	public Artista(String nome, LocalDate dataNascimento, String genero, List<Personagem> personagens) {
+	
+	public Artista(String nome, LocalDate dataNascimento, List<Personagem> personagens) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
-		this.genero = genero;
 		this.personagens = personagens;
 	}
 
@@ -44,14 +42,6 @@ public class Artista {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
 	public List<Personagem> getPersonagens() {
 		return personagens;
 	}
@@ -60,4 +50,11 @@ public class Artista {
 		this.personagens = personagens;
 	}
 
+	@Override
+	public String toString() {
+		return "Artista [idArtista=" + idArtista + ", nome=" + nome + ", dataNascimento=" + dataNascimento
+				+ ", personagens=" + personagens + "]";
+	}
+	
+	
 }

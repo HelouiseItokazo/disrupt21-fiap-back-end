@@ -7,6 +7,7 @@ public class Evento {
 	private LocalDate dataEvento;
 	private String descricao;
 	private String local;
+	private Integer viagemNoTempo;
 
 	public Evento(LocalDate dataEvento, String descricao, String local) {
 		this.dataEvento = dataEvento;
@@ -49,4 +50,19 @@ public class Evento {
 		this.local = local;
 	}
 
+	public Integer getViagemNoTempo() {
+		return viagemNoTempo;
+	}
+
+	public void setViagemNoTempo(Integer viagemNoTempo) {
+		this.viagemNoTempo = viagemNoTempo;
+	}
+
+	@Override
+	public String toString() {
+		return "Evento [idEvento=" + idEvento + ", dataEvento=" + dataEvento + ", descricao=" + descricao + ", local="
+				+ local + ", viagemNoTempo=" + viagemNoTempo + "]";
+	}
+	
+	
 }
