@@ -28,10 +28,17 @@ public class PersonagemService implements Service<Personagem>{
 	}
 	
 	@Override
-	public Personagem buscarPorId(long id) throws DatabaseAccessException, IdException {
-		Personagem personagem = personagemDAO.findById(id);
-		personagemValidator.validarId(personagem);
+	public Personagem buscarPorId(long idPersonagem) throws DatabaseAccessException, IdException {
+		personagemValidator.validarId(idPersonagem);
+		Personagem personagem = personagemDAO.findById(idPersonagem);
 		return personagem;
+	}
+	
+	public List<Personagem> buscarPersonagensPorIdArtista(long idArtista) throws DatabaseAccessException, IdException{
+		personagemValidator.validarId(idArtista);
+		List <Personagem> personagens = personagemDAO.findAllPersonagensById(idArtista);
+		personagemValidator.validarLista(personagens);
+		return personagens;
 	}
 	
 }

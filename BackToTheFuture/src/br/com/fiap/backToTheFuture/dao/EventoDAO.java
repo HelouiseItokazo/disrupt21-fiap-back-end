@@ -45,6 +45,8 @@ public class EventoDAO implements DAO<Evento> {
 				evento.setIdEvento(rs.getLong("id_evento"));
 				evento.setDataEvento(rs.getDate("dt_evento").toLocalDate());
 				evento.setDescricao(rs.getString("ds_evento"));
+				evento.setLocal(rs.getString("ds_local_evento"));
+				evento.setViagemNoTempo(rs.getInt("fl_viagem_tempo"));
 
 				eventos.add(evento);
 			}
@@ -59,7 +61,7 @@ public class EventoDAO implements DAO<Evento> {
 	}
 
 	@Override
-	public Evento findById(long id) throws DatabaseAccessException {
+	public Evento findById(long idPersonagem) throws DatabaseAccessException {
 		
 		String sql = 
 				
@@ -79,7 +81,7 @@ public class EventoDAO implements DAO<Evento> {
 		
 		) {
 
-			stmt.setLong(1, id);
+			stmt.setLong(1, idPersonagem);
 			
 			ResultSet rs = stmt.executeQuery();
 			
@@ -91,6 +93,7 @@ public class EventoDAO implements DAO<Evento> {
 				evento.setDataEvento(rs.getDate("dt_evento").toLocalDate());
 				evento.setDescricao(rs.getString("ds_evento"));
 				evento.setLocal(rs.getString("ds_local_evento"));
+				evento.setViagemNoTempo(rs.getInt("fl_viagem_tempo"));
 			}
 			
 			rs.close();
@@ -103,7 +106,7 @@ public class EventoDAO implements DAO<Evento> {
 
 	}
 	
-	public List<Evento> findAllById(long id) throws DatabaseAccessException {
+	public List<Evento> findAllById(long idPersonagem) throws DatabaseAccessException {
 		
 		String sql = 
 				
@@ -123,19 +126,21 @@ public class EventoDAO implements DAO<Evento> {
 		
 		) {
 
-			stmt.setLong(1, id);
+			stmt.setLong(1, idPersonagem);
 			
 			ResultSet rs = stmt.executeQuery();
 			
 			List<Evento> eventos = new ArrayList<Evento>();	
-			Evento evento = new Evento();
 
 			while (rs.next()) {
+				
+				Evento evento = new Evento();
 				
 				evento.setIdEvento(rs.getLong("id_evento"));				
 				evento.setDataEvento(rs.getDate("dt_evento").toLocalDate());
 				evento.setDescricao(rs.getString("ds_evento"));
 				evento.setLocal(rs.getString("ds_local_evento"));
+				evento.setViagemNoTempo(rs.getInt("fl_viagem_tempo"));
 				
 				eventos.add(evento);
 			}
@@ -170,14 +175,16 @@ public class EventoDAO implements DAO<Evento> {
 			ResultSet rs = stmt.executeQuery();
 			
 			List<Evento> eventos = new ArrayList<Evento>();			
-			Evento evento = new Evento();
 			
 			while (rs.next()) {
 				
-				evento.setIdEvento(rs.getLong("id_evento"));
+				Evento evento = new Evento();
+				
+				evento.setIdEvento(rs.getLong("id_evento"));				
 				evento.setDataEvento(rs.getDate("dt_evento").toLocalDate());
 				evento.setDescricao(rs.getString("ds_evento"));
 				evento.setLocal(rs.getString("ds_local_evento"));
+				evento.setViagemNoTempo(rs.getInt("fl_viagem_tempo"));
 				
 				eventos.add(evento);
 			}

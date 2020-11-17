@@ -10,8 +10,8 @@ import br.com.fiap.backToTheFuture.validation.generics.Validation;
 public class ArtistaValidator implements Validation<Artista>{
 	
 	@Override
-	public void validarId(Artista artista) throws IdException {
-		if (artista.getIdArtista() == null) {
+	public void validarId(Long idArtista) throws IdException {
+		if (idArtista == null) {
 			throw new IdException("Id do artista é inválido.");
 		}
 	}

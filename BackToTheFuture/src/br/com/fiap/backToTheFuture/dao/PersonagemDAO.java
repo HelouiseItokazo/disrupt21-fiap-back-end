@@ -9,6 +9,7 @@ import java.util.List;
 
 import br.com.fiap.backToTheFuture.connectionFactory.ConnectionFactory;
 import br.com.fiap.backToTheFuture.dao.generics.DAO;
+import br.com.fiap.backToTheFuture.domain.Artista;
 import br.com.fiap.backToTheFuture.domain.Personagem;
 import br.com.fiap.backToTheFuture.exception.ConnectionException;
 import br.com.fiap.backToTheFuture.exception.DatabaseAccessException;
@@ -24,15 +25,7 @@ public class PersonagemDAO implements DAO<Personagem> {
 	@Override
 	public List<Personagem> findAll() throws DatabaseAccessException {
 		
-		String sql = 
-
-				"select  A.NM_ARTISTA,    " + 
-				"        P.ID_PERSONAGEM, " + 
-				"        P.NM_PERSONAGEM, " + 
-				"        P.DT_NASCIMENTO, " + 
-				"        P.DS_PERSONAGEM  " + 
-				"from T_BTTF_ARTISTA A inner join T_BTTF_PERSONAGEM P " + 
-				"on (A.ID_ARTISTA = P.ID_ARTISTA)";
+		String sql = "select * from T_BTTF_PERSONAGEM";
 		
 		try (
 				conn;
@@ -47,8 +40,10 @@ public class PersonagemDAO implements DAO<Personagem> {
 			while (rs.next()) {
 
 				Personagem personagem = new Personagem();
+				Artista artista = new Artista();
 				
-				personagem.setIdPersonagem(rs.getLong("id_personagem"));				
+				personagem.setIdPersonagem(rs.getLong("id_personagem"));
+				artista.setIdArtista(rs.getLong("id_artista"));
 				personagem.setNome(rs.getString("nm_personagem"));
 				personagem.setDataNascimento(rs.getDate("dt_nascimento").toLocalDate());
 				personagem.setDescricao(rs.getString("ds_personagem"));
@@ -66,18 +61,9 @@ public class PersonagemDAO implements DAO<Personagem> {
 	}
 
 	@Override
-	public Personagem findById(long id) throws DatabaseAccessException {
+	public Personagem findById(long idPersonagem) throws DatabaseAccessException {
 		
-		String sql = 
-				
-				"select  A.NM_ARTISTA,    " + 
-				"        P.ID_PERSONAGEM, " + 
-				"        P.NM_PERSONAGEM, " + 
-				"        P.DT_NASCIMENTO, " + 
-				"        P.DS_PERSONAGEM  " + 
-				"from T_BTTF_ARTISTA A inner join T_BTTF_PERSONAGEM P " + 
-				"on (A.ID_ARTISTA = P.ID_ARTISTA) " + 
-				"where P.ID_ARTISTA = ?";
+		String sql = "select * from T_BTTF_PERSONAGEM where ID_PERSONAGEM = ?";
 		
 		try (
 				conn;
@@ -85,7 +71,7 @@ public class PersonagemDAO implements DAO<Personagem> {
 		
 		) {
 
-			stmt.setLong(1, id);
+			stmt.setLong(1, idPersonagem);
 			
 			ResultSet rs = stmt.executeQuery();
 
@@ -93,7 +79,8 @@ public class PersonagemDAO implements DAO<Personagem> {
 
 			while (rs.next()) {
 				
-				personagem.setIdPersonagem(rs.getLong("id_personagem"));	
+				personagem.setIdPersonagem(rs.getLong("id_personagem"));
+				personagem.setIdArtista(rs.getLong("id_artista"));
 				personagem.setNome(rs.getString("nm_personagem"));
 				personagem.setDataNascimento(rs.getDate("dt_nascimento").toLocalDate());
 				personagem.setDescricao(rs.getString("ds_personagem"));
@@ -106,6 +93,47 @@ public class PersonagemDAO implements DAO<Personagem> {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 			throw new DatabaseAccessException("Falha ao consultar personagem.");
+		}
+	}
+	
+	public List<Personagem> findAllPersonagensById(long idArtista) throws DatabaseAccessException {
+		
+		String sql = "select * from T_BTTF_PERSONAGEM where ID_ARTISTA = ?";
+		
+		try (
+				conn;
+				PreparedStatement stmt = this.conn.prepareStatement(sql)
+		
+		) {
+
+			stmt.setLong(1, idArtista);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			List<Personagem> personagens = new ArrayList<Personagem>();
+
+
+			while (rs.next()) {
+				
+				Personagem personagem = new Personagem();
+				Artista artista = new Artista();
+				
+				personagem.setIdPersonagem(rs.getLong("id_personagem"));
+				artista.setIdArtista(rs.getLong("id_artista"));
+				personagem.setNome(rs.getString("nm_personagem"));
+				personagem.setDataNascimento(rs.getDate("dt_nascimento").toLocalDate());
+				personagem.setDescricao(rs.getString("ds_personagem"));
+				
+				personagens.add(personagem);
+                
+			}
+			
+			rs.close();
+			return personagens;
+
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DatabaseAccessException("Falha ao consultar todos os personagens associados ao artista.");
 		}
 	}
 

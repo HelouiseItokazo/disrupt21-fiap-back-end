@@ -10,8 +10,8 @@ import br.com.fiap.backToTheFuture.validation.generics.Validation;
 public class PersonagemValidator implements Validation<Personagem>{
 	
 	@Override
-	public void validarId(Personagem personagem) throws IdException {
-		if (personagem.getIdPersonagem() == null) {
+	public void validarId(Long idPersonagem) throws IdException {
+		if (idPersonagem == null) {
 			throw new IdException("Id do personagem é inválido.");
 		}
 	}

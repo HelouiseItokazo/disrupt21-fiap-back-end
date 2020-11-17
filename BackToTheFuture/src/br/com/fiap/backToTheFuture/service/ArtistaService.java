@@ -28,9 +28,9 @@ public class ArtistaService implements Service<Artista>{
 	}
 	
 	@Override
-	public Artista buscarPorId(long id) throws DatabaseAccessException, IdException {
-		Artista artista = artistaDAO.findById(id);
-		artistaValidator.validarId(artista);
+	public Artista buscarPorId(long idArtista) throws DatabaseAccessException, IdException {
+		Artista artista = artistaDAO.findById(idArtista);
+		artistaValidator.validarId(idArtista);
 		return artista;
 	}
 	

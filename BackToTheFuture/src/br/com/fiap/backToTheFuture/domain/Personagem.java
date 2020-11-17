@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Personagem {
 	private Long idPersonagem;
+	private Long idArtista;
 	private String nome;
 	private LocalDate dataNascimento;
 	private List<Evento> eventos;
@@ -27,6 +28,14 @@ public class Personagem {
 
 	public void setIdPersonagem(Long idPersonagem) {
 		this.idPersonagem = idPersonagem;
+	}
+
+	public Long getIdArtista() {
+		return idArtista;
+	}
+
+	public void setIdArtista(Long idArtista) {
+		this.idArtista = idArtista;
 	}
 
 	public String getNome() {

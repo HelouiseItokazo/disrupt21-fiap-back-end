@@ -9,5 +9,5 @@ public interface Validation<T> {
 
 	void validarLista(List<T> t) throws DatabaseAccessException;
 
-	void validarId(T t) throws IdException;
+	void validarId(Long id) throws IdException;
 }

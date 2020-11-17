@@ -3,12 +3,11 @@ package br.com.fiap.backToTheFuture.validation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 import java.util.List;
 
 import br.com.fiap.backToTheFuture.domain.Evento;
-import br.com.fiap.backToTheFuture.exception.DateException;
 import br.com.fiap.backToTheFuture.exception.DatabaseAccessException;
+import br.com.fiap.backToTheFuture.exception.DateException;
 import br.com.fiap.backToTheFuture.exception.FlagException;
 import br.com.fiap.backToTheFuture.exception.IdException;
 import br.com.fiap.backToTheFuture.helper.DateHelper;
@@ -17,8 +16,8 @@ import br.com.fiap.backToTheFuture.validation.generics.Validation;
 public class EventoValidator implements Validation<Evento>{
 	
 	@Override
-	public void validarId(Evento evento) throws IdException  {
-		if (evento.getIdEvento() == null) {
+	public void validarId(Long idEvento) throws IdException  {
+		if (idEvento == null) {
 			throw new IdException("Id do evento é inválido");
 		}
 	}
@@ -32,13 +31,14 @@ public class EventoValidator implements Validation<Evento>{
 	
 	public void validarFormatoData(LocalDate startDate, LocalDate endDate) throws DateException {
 		try {
-			
-			LocalDate.parse(DateHelper.toText(startDate), DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.STRICT));
-			LocalDate.parse(DateHelper.toText(endDate), DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.STRICT));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+			LocalDate.parse(DateHelper.toText(startDate), formatter);
+			LocalDate.parse(DateHelper.toText(endDate), formatter);
 			
 		} catch (DateTimeParseException e) {
 			System.err.println(e.getMessage());
-			throw new DateException("Datas inválidas ou em formato inválido. Formato esperado dd/MM/yyyy.");
+			throw new DateException("Formato de data inválido. Formato esperado dd/MM/yyyy.");
 		} 
 	}
 	
@@ -49,8 +49,9 @@ public class EventoValidator implements Validation<Evento>{
 	}
 	
 	public void validarAnosExistentesNoFilme(LocalDate startDate, LocalDate endDate) throws DateException {
-		if ((startDate.getYear() < 1955 && endDate.getYear() < 1985) || endDate.getYear() > 1985) {
-			throw new DateException("O ano informado não existe no filme. Anos existentes 1955 e 1985.");
+		if ((startDate.getYear() != 1955 && startDate.getYear() != 1985) 
+				&& (endDate.getYear() != 1955 && endDate.getYear() != 1985)){
+			throw new DateException("O período informado não existe no filme. Informe um período que compreenda os anos de 1955 e/ou 1985.");
 		}
 	}
 	
