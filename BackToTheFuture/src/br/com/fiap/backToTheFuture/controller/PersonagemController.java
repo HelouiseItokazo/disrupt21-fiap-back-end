@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServlet;
 import br.com.fiap.backToTheFuture.domain.Artista;
 import br.com.fiap.backToTheFuture.domain.Evento;
 import br.com.fiap.backToTheFuture.domain.Personagem;
-import br.com.fiap.backToTheFuture.dto.PersonagemResponseDTO;
 
-public class PersonagemDTO extends HttpServlet{
+public class PersonagemController extends HttpServlet{
 
 	private static final long serialVersionUID = 5325899467937477904L;
 	

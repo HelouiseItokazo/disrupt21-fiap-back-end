@@ -2,17 +2,12 @@ package br.com.fiap.backToTheFuture.main;
 
 import java.time.LocalDate;
 
-import br.com.fiap.backToTheFuture.domain.Artista;
-import br.com.fiap.backToTheFuture.domain.Personagem;
-import br.com.fiap.backToTheFuture.dto.PersonagemResponseDTO;
 import br.com.fiap.backToTheFuture.exception.ConnectionException;
 import br.com.fiap.backToTheFuture.exception.DatabaseAccessException;
 import br.com.fiap.backToTheFuture.exception.DateException;
 import br.com.fiap.backToTheFuture.exception.FlagException;
 import br.com.fiap.backToTheFuture.exception.IdException;
-import br.com.fiap.backToTheFuture.service.ArtistaService;
 import br.com.fiap.backToTheFuture.service.EventoService;
-import br.com.fiap.backToTheFuture.service.PersonagemService;
 
 public class Main {
 
