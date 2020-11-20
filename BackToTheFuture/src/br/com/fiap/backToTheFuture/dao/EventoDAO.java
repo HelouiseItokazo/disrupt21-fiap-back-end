@@ -68,7 +68,8 @@ public class EventoDAO implements DAO<Evento> {
 				"select  E.ID_EVENTO, 	   " + 
 				"        E.DT_EVENTO,      " + 
 				"        E.DS_EVENTO,      " + 
-				"        E.DS_LOCAL_EVENTO " + 
+				"        E.DS_LOCAL_EVENTO, " +
+				"	     E.FL_VIAGEM_TEMPO " +
 				"from T_BTTF_EVENTO E inner join T_BTTF_PERSONAGEM_EVENTO PE " + 
 				"on (E.ID_EVENTO = PE.ID_EVENTO) " + 
 				"inner join T_BTTF_PERSONAGEM P " + 
@@ -113,7 +114,8 @@ public class EventoDAO implements DAO<Evento> {
 				"select  E.ID_EVENTO, 	   " + 
 				"        E.DT_EVENTO,      " + 
 				"        E.DS_EVENTO,      " + 
-				"        E.DS_LOCAL_EVENTO " + 
+				"        E.DS_LOCAL_EVENTO, " + 
+				"	     E.FL_VIAGEM_TEMPO " +
 				"from T_BTTF_EVENTO E inner join T_BTTF_PERSONAGEM_EVENTO PE " + 
 				"on (E.ID_EVENTO = PE.ID_EVENTO) " + 
 				"inner join T_BTTF_PERSONAGEM P " + 
@@ -155,14 +157,12 @@ public class EventoDAO implements DAO<Evento> {
 
 	}
 	
-	public List<Evento> findAllByDateAndFlag(LocalDate startDate, LocalDate endDate, Integer viagemNoTempo) throws DatabaseAccessException {
+	public List<Evento> findAllByDateAndFlag(LocalDate date, Integer viagemNoTempo, Long idPersonagem) throws DatabaseAccessException {
 		
 		String sql = 
 				
-				"select * from T_BTTF_EVENTO where DT_EVENTO " +
-				"between to_date('" + DateHelper.toText(startDate) + "', 'DD/MM/YYYY') " +
-				"and to_date('" + DateHelper.toText(endDate) + "', 'DD/MM/YYYY') " +
-				"and fl_viagem_tempo =?";
+				"select * from T_BTTF_PERSONAGEM_EVENTO A inner join T_BTTF_EVENTO B " +
+				"on (A.ID_EVENTO = B.ID_EVENTO) where DT_EVENTO = '" + DateHelper.toText(date) + "' and FL_VIAGEM_TEMPO=? and A.ID_PERSONAGEM=? ";
 		
 		try (
 				conn;
@@ -171,6 +171,7 @@ public class EventoDAO implements DAO<Evento> {
 		) {
 			
 			stmt.setInt(1, viagemNoTempo);
+			stmt.setLong(2, idPersonagem);
 			
 			ResultSet rs = stmt.executeQuery();
 			

@@ -43,15 +43,13 @@ public class EventoService implements Service<Evento>{
 		eventoValidator.validarLista(eventos);
 		return eventos;
 	}
-	
-	public List<Evento> buscarEventoPorDataEFlag(LocalDate startDate, LocalDate endDate, Integer viagemNoTempo) throws DateException, FlagException, DatabaseAccessException {
-		eventoValidator.validarFormatoData(startDate, endDate);
-		eventoValidator.validarIntervaloEntreDatas(startDate, endDate);
-		eventoValidator.validarAnosExistentesNoFilme(startDate, endDate);
+
+	public List<Evento> buscarEventoPorDataEFlag(LocalDate date, Integer viagemNoTempo, Long idPersonagem) throws DateException, FlagException, DatabaseAccessException, IdException {
+		eventoValidator.validarFormatoData(date);
 		eventoValidator.validarFlag(viagemNoTempo);
-		List<Evento> eventos = eventoDAO.findAllByDateAndFlag(startDate, endDate, viagemNoTempo);
-		//eventoValidator.validarLista(eventos);
-		
+		eventoValidator.validarId(idPersonagem);
+		List<Evento> eventos = eventoDAO.findAllByDateAndFlag(date, viagemNoTempo, idPersonagem);
+		eventoValidator.validarLista(eventos);
 		return eventos;
 	}
 	
