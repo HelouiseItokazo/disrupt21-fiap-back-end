@@ -4,6 +4,24 @@ const objBusca = {
     ano: ""
 }
 
+function carregarIdioma() {
+    atualizarIdioma(localStorage.getItem("idioma"), "guide");
+}
+
+carregarIdioma();
+
+engBtn.addEventListener('click', e => {
+    e.preventDefault();
+    localStorage.setItem("idioma", "eng")
+    atualizarIdioma("eng", "guide");
+})
+
+ptBtn.addEventListener('click', e => {
+    e.preventDefault();
+    localStorage.setItem("idioma", "pt")
+    atualizarIdioma("pt", "guide");
+})
+
 function percorrerInputs(element, index, array) {
     console.log(element);
 }
@@ -40,8 +58,8 @@ function logArrayElements(element, index, array) {
                			$(".description-container").html(info); 		
 
                 },
-                error: function(a,b,c) {
-                     console.log('something went wrong:',a,b,c);
+                error: function(data, textStatus, jqXHR) {
+                     console.log('Erro na requisição.');
                 }
            });
 

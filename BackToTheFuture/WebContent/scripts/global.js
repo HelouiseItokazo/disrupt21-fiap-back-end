@@ -31,10 +31,49 @@ function atualizarIdioma(idioma, page) {
 
 
         } else {
+            document.querySelector('.film-date > p').innerHTML = "<strong>Release: </strong>1985";
+
+            document.querySelector('.film-category > p').innerHTML = "<strong>Genre: </strong>Sci-Fi, Adventure";
+
+            document.querySelector('.film-sinopse > p').innerHTML = "Marty McFly, a teenager of a small Californian City, was transported to the 50s when the excentric Doctor Brown”s experience went wrong. " +
+                "Travelling through the time on a modified car, Marty knew younger versions of your parents and had to make them to fall in love by yourselves, although he’ll not exist anymore. To make things more complicated, Marty needs to come back home in time to save the scientist.";
+
+            document.querySelector('.film-direction > p').innerHTML = "<p><strong>Directed by: </strong>Robert Zemeckis</p>"
+
+            document.querySelector('.film-cast > p').innerHTML = "<strong>Cast: </strong>Michael J. Fox, Christopher Lloyd, Lea Thompson, Crispin Glover, Thomas F. Wilson, Claudia Wells"
 
         }
 
-        console.log("about")
+    } else if(page == "guide") {
+    	if(idioma == "pt") {
+    		document.querySelector('.film-info div h1').innerHTML = "Conheça os personagens";
+    		document.querySelector('.film-sinopse p').innerHTML = "Selecione um personagem abaixo para um resumo do seu papel no filme - e o período em que cada evento ocorre.";
+    	} else {
+    		document.querySelector('.film-info div h1').innerHTML = "Meet the characters";
+    		document.querySelector('.film-sinopse p').innerHTML = "Pick a character and a year - we will show you what the character did in that time.";
+    	}
+    	
+    } else if(page == "contact") {
+    	if(idioma == "pt") {
+    		document.querySelector('#contact-form').innerHTML = "CONTATO";
+    		
+    		document.querySelector('#contactName').placeholder = "Nome";
+    		document.querySelector('#contactEmail').placeholder = "E-mail";
+    		document.querySelector('#contactTelephone').placeholder = "Telefone";
+    		document.querySelector('#contactMessage').placeholder = "Mensagem";
+    		
+    		document.querySelector('#sendMessage').innerHTML = "Enviar";
+    	} else {
+    		document.querySelector('#contact-form').innerHTML = "CONTACT";
+    		
+    		document.querySelector('#contactName').placeholder = "Name";
+    		document.querySelector('#contactEmail').placeholder = "E-mail";
+    		document.querySelector('#contactTelephone').placeholder = "Tel";
+    		document.querySelector('#contactMessage').placeholder = "Message";
+    		
+    		document.querySelector('#sendMessage').innerHTML = "Send";
+    	}
+    	
     }
 
 }
