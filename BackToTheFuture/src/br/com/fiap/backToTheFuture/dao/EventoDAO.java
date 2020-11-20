@@ -167,7 +167,7 @@ public class EventoDAO implements DAO<Evento> {
 				"ON (E.ID_EVENTO = PE.ID_EVENTO) " +
 				"WHERE E.DT_EVENTO BETWEEN TO_DATE ('" + DateHelper.toText(startDate) + "', 'dd/MM/yyyy')AND TO_DATE ('" + DateHelper.toText(endDate) + "', 'dd/MM/yyyy') " +
 				"AND E.FL_VIAGEM_TEMPO =? " +
-				"AND PE.ID_PERSONAGEM =? ORDER BY E.DT_EVENTO DESC";
+				"AND PE.ID_PERSONAGEM =? ORDER BY E.DT_EVENTO ASC";
 		
 		try (
 				conn;

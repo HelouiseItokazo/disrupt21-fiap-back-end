@@ -32,34 +32,35 @@ public class EventoController extends HttpServlet {
 		Long idPersonagem = Long.parseLong(eventoRequest.getParameter("id"));
 		String codData = eventoRequest.getParameter("ano");
 
-		LocalDate data = LocalDate.now();
+		LocalDate data = null;
+		LocalDate dtFim = null;
 		// 0 = Sim - 1 = Não
 		int viagemNoTempo = 1;
 
 		switch (codData) {
 		case "year1985":
 			data = LocalDate.of(1985, 1, 1);
+			dtFim = LocalDate.of(1985, 12, 31);
 			viagemNoTempo = 1;
 			break;
 		case "year1955":
 			data = LocalDate.of(1955, 1, 1);
-			viagemNoTempo = 1;
+			dtFim = LocalDate.of(1955, 12, 31);
+			viagemNoTempo = 0;
 			break;
 		case "year1985alt":
 			data = LocalDate.of(1985, 1, 1);
+			dtFim = LocalDate.of(1985, 12, 31);
 			viagemNoTempo = 0;
 		}
 
 		try {
 
 			EventoService eventoService = new EventoService();
-			List<Evento> eventos = eventoService.buscarEventoPorDataEFlag(data, viagemNoTempo, idPersonagem);
+			List<Evento> eventos = eventoService.buscarEventoPorDataEFlag(data, dtFim, viagemNoTempo, idPersonagem);
 			List<String> descEventos = new ArrayList<String>();
 
 			eventos.forEach(str -> descEventos.add(str.getDescricao()));
-
-			descEventos.add("Registro 1");
-			descEventos.add("Registro 2");
 
 			Gson gson = new Gson();
 
