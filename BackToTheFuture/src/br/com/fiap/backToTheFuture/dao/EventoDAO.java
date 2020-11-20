@@ -157,12 +157,17 @@ public class EventoDAO implements DAO<Evento> {
 
 	}
 	
-	public List<Evento> findAllByDateAndFlag(LocalDate date, Integer viagemNoTempo, Long idPersonagem) throws DatabaseAccessException {
-		
+	public List<Evento> findAllByDateAndFlag(LocalDate startDate, LocalDate endDate, Integer viagemNoTempo, Long idPersonagem) throws DatabaseAccessException {
+		 
 		String sql = 
 				
-				"select * from T_BTTF_PERSONAGEM_EVENTO A inner join T_BTTF_EVENTO B " +
-				"on (A.ID_EVENTO = B.ID_EVENTO) where DT_EVENTO = '" + DateHelper.toText(date) + "' and FL_VIAGEM_TEMPO=? and A.ID_PERSONAGEM=? ";
+				"SELECT * " +
+				"FROM T_BTTF_EVENTO E " +
+				"INNER JOIN T_BTTF_PERSONAGEM_EVENTO PE " +
+				"ON (E.ID_EVENTO = PE.ID_EVENTO) " +
+				"WHERE E.DT_EVENTO BETWEEN TO_DATE ('" + DateHelper.toText(startDate) + "', 'dd/MM/yyyy')AND TO_DATE ('" + DateHelper.toText(endDate) + "', 'dd/MM/yyyy') " +
+				"AND E.FL_VIAGEM_TEMPO =? " +
+				"AND PE.ID_PERSONAGEM =? ORDER BY E.DT_EVENTO DESC";
 		
 		try (
 				conn;

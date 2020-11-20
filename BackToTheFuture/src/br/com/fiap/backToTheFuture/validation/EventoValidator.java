@@ -29,11 +29,12 @@ public class EventoValidator implements Validation<Evento>{
 		}
 	}
 	
-	public void validarFormatoData(LocalDate date) throws DateException {
+	public void validarFormatoData(LocalDate startDate, LocalDate endDate) throws DateException {
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-			LocalDate.parse(DateHelper.toText(date), formatter);
+			LocalDate.parse(DateHelper.toText(startDate), formatter);
+			LocalDate.parse(DateHelper.toText(endDate), formatter);
 			
 		} catch (DateTimeParseException e) {
 			System.err.println(e.getMessage());
@@ -41,10 +42,17 @@ public class EventoValidator implements Validation<Evento>{
 		} 
 	}
 	
-	public void validarData(LocalDate date) throws DateException {
-		if (date.getYear() != 01/11/1985 && date.getYear() != 01/11/1955) {
-			throw new DateException("Data invalida.");
+	public void validarIntervaloEntreDatas(LocalDate startDate, LocalDate endDate) throws DateException {	
+		if (startDate.isAfter(endDate)) {				
+			throw new DateException("Data inicial não pode ser maior que data final.");							
 		} 
+	}
+	
+	public void validarAnosExistentesNoFilme(LocalDate startDate, LocalDate endDate) throws DateException {	
+		if ((startDate.getYear() != 1955 && startDate.getYear() != 1985) 	
+				&& (endDate.getYear() != 1955 && endDate.getYear() != 1985)){	
+			throw new DateException("O período informado não existe no filme. Informe um período que compreenda os anos de 1955 e/ou 1985.");	
+		}	
 	}
 	
 	public void validarFlag(Integer viagemNoTempo) throws FlagException {
