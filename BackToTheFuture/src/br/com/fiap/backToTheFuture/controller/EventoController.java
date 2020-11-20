@@ -32,9 +32,9 @@ public class EventoController extends HttpServlet {
 		Long idPersonagem = Long.parseLong(eventoRequest.getParameter("id"));
 		String codData = eventoRequest.getParameter("ano");
 
-		LocalDate data;
+		LocalDate data = LocalDate.now();
 		// 0 = Sim - 1 = Não
-		int viagemNoTempo;
+		int viagemNoTempo = 1;
 
 		switch (codData) {
 		case "year1985":
@@ -53,7 +53,7 @@ public class EventoController extends HttpServlet {
 		try {
 
 			EventoService eventoService = new EventoService();
-			List<Evento> eventos = eventoService.buscarTodosOsEventosPorIdDoPersonagem(idPersonagem);
+			List<Evento> eventos = eventoService.buscarEventoPorDataEFlag(data, viagemNoTempo, idPersonagem);
 			List<String> descEventos = new ArrayList<String>();
 
 			eventos.forEach(str -> descEventos.add(str.getDescricao()));
