@@ -17,6 +17,7 @@
 
 .film-info {
     width: 60%;
+    max-height: 830px;
 }
 
 .marty {

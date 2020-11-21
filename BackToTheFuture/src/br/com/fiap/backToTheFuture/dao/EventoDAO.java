@@ -171,6 +171,7 @@ public class EventoDAO implements DAO<Evento> {
 				"AND E.FL_VIAGEM_TEMPO =? " +
 				"AND PE.ID_PERSONAGEM =? ";
 		
+
 		
 		try (
 				conn;
