@@ -53,7 +53,7 @@ public class EventoController extends HttpServlet {
 		try {
 
 			EventoService eventoService = new EventoService();
-			List<Evento> eventos = eventoService.buscarEventoPorDataEFlag(data, viagemNoTempo, idPersonagem);
+			List<Evento> eventos = eventoService.buscarEventoPorDataEFlag(data, data, viagemNoTempo, idPersonagem);
 			List<String> descEventos = new ArrayList<String>();
 
 			eventos.forEach(str -> descEventos.add(str.getDescricao()));

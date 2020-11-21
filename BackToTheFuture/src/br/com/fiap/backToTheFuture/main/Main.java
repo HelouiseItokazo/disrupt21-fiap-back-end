@@ -39,7 +39,7 @@ public class Main {
 
 		// BUSCAR TODOS OS EVENTOS RELACIONADOR PERIODO E FLAG
 		EventoService eventoService2 = new EventoService();
-		var c = eventoService2.buscarEventoPorDataEFlag(LocalDate.of(1985, 01, 01), LocalDate.of(1985, 12, 31), 0, 5L);
+		var c = eventoService2.buscarEventoPorDataEFlag(LocalDate.of(1955, 01, 01), LocalDate.of(1955, 12, 31), 0, 3L);
 		System.out.println(c.toString());
 
 		// BUSCAR TODOS OS PERSONAGENS

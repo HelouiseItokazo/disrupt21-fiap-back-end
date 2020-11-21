@@ -1,6 +1,7 @@
 package br.com.fiap.backToTheFuture.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -165,9 +166,11 @@ public class EventoDAO implements DAO<Evento> {
 				"FROM T_BTTF_EVENTO E " +
 				"INNER JOIN T_BTTF_PERSONAGEM_EVENTO PE " +
 				"ON (E.ID_EVENTO = PE.ID_EVENTO) " +
-				"WHERE E.DT_EVENTO BETWEEN TO_DATE ('" + DateHelper.toText(startDate) + "', 'dd/MM/yyyy')AND TO_DATE ('" + DateHelper.toText(endDate) + "', 'dd/MM/yyyy') " +
+				"WHERE E.DT_EVENTO BETWEEN ? AND ? " +
+				//"WHERE E.DT_EVENTO BETWEEN TO_DATE ('" + DateHelper.toText(startDate) + "', 'dd/MM/yyyy') AND TO_DATE ('" + DateHelper.toText(endDate) + "', 'dd/MM/yyyy') " +
 				"AND E.FL_VIAGEM_TEMPO =? " +
-				"AND PE.ID_PERSONAGEM =? ORDER BY E.DT_EVENTO DESC";
+				"AND PE.ID_PERSONAGEM =? ";
+		
 		
 		try (
 				conn;
@@ -175,8 +178,10 @@ public class EventoDAO implements DAO<Evento> {
 		
 		) {
 			
-			stmt.setInt(1, viagemNoTempo);
-			stmt.setLong(2, idPersonagem);
+			stmt.setDate(1, Date.valueOf(startDate));
+			stmt.setDate(2, Date.valueOf(endDate));
+			stmt.setInt(3, viagemNoTempo);
+			stmt.setLong(4, idPersonagem);
 			
 			ResultSet rs = stmt.executeQuery();
 			
