@@ -3,7 +3,7 @@
 
 **Tecnologias: Java, Java Script , JSP, Servlet, HTML e CSS**
 
-Este projeto foi desenvolvido em para atender ao desafio **Disrupt21 ** proposto pela **Faculdade de Informática e Administração Paulista - FIAP**, para os alunos do segundo semestres do curso de Tecnologia Análise e Desenvolvimento de Sistemas.
+Este projeto foi desenvolvido em para atender ao desafio **Disrupt21** proposto pela **Faculdade de Informática e Administração Paulista - FIAP**, para os alunos do segundo semestres do curso de Tecnologia Análise e Desenvolvimento de Sistemas.
 
 Desafio
 ----------
@@ -25,12 +25,15 @@ Inicialização
 Após abertura do projeto, executar os scripts .sql disponpiveis no projeto, na seguinte ordem:
 
 > - **bttf_ddl.sql** - para criação/deleção de tabelas, relacionamentos e sequences.
-> - **bttf_dml** - para população/deleção da massa de dados.
+> - **bttf_dml.sql** - para população/deleção da massa de dados.
 
 Encontre os arquivos em:
 <i class="icon-folder-open"></i> BackToTheFuture/src/banco
 
-Para exibir o projeto em seu navagador:
+Para exibir o projeto em seu navegador no Eclipse:
+>- Window/Web Browser/Chrome (sugestão)
+>- Clique com botão direito em cima do projeto:
+>- Run As/Run or Server/Finish
 
 Configurações
 -------------
@@ -45,9 +48,4 @@ Encontre os arquivos em:
 <i class="icon-folder-open"></i> BackToTheFuture/src/main/resources
 
 >**Note:** 
->Caso execute o projeto com o banco de dados default, recomendamos que execute os comandos <i class="icon-trash"></i>**DELETE FROM** e <i class="icon-trash"></i>**DROP TABLE**  presentes nos arquivos **.sql** descritos acima.
-
-Aplicação
--------------
-
-Para realização das consultas clique em:
+>Caso execute o projeto com o banco de dados default, recomendamos que execute os comandos <i class="icon-trash"></i>**DELETE FROM** e <i class="icon-trash"></i>**DROP TABLE**  presentes nos arquivos **.sql** descritos acima. Desabilitar o auto commit
